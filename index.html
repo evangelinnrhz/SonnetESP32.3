@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESP32 · Joystick Dino Runner</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="dashboard">
+
+    <header class="dash-header">
+      <div class="eyebrow"><span class="dot"></span>ESP32 · Joystick Controller</div>
+      <h1>Dino <span>Runner</span></h1>
+
+      <details class="connection-card">
+        <summary>Connection settings</summary>
+        <div class="conn-row">
+          <input id="espIp" type="text" placeholder="192.168.4.1" value="192.168.4.1" />
+          <button id="saveIp">Save</button>
+        </div>
+        <div class="conn-status" id="connStatus">Not connected yet.</div>
+      </details>
+    </header>
+
+    <div class="game-shell">
+      <div class="game-topbar">
+        <div class="score">SCORE <span id="scoreValue">0</span></div>
+        <div class="score high">HI <span id="highScoreValue">0</span></div>
+      </div>
+
+      <canvas id="gameCanvas" width="800" height="240"></canvas>
+
+      <div class="game-overlay" id="gameOverlay">
+        <div class="overlay-title" id="overlayTitle">Press Space or tilt joystick up to start</div>
+        <div class="overlay-sub">Space bar works for testing — joystick tilt-up jumps too</div>
+      </div>
+    </div>
+
+    <details class="calibration-card">
+      <summary>Joystick calibration (debug)</summary>
+      <p class="cal-text">
+        Raw X: <span id="rawX">--</span> &nbsp; Raw Y: <span id="rawY">--</span><br>
+        Jump triggers when Y crosses below <span id="jumpThreshold">--</span>.
+        If tilting up doesn't jump, your joystick's "up" direction may increase
+        Y instead of decreasing it — open <code>script.js</code> and flip the
+        threshold comparison (see comments near <code>JUMP_THRESHOLD</code>).
+      </p>
+    </details>
+
+  </div>
+
+<script src="script.js" defer></script>
+</body>
+</html>

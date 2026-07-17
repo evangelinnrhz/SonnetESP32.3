@@ -1,0 +1,193 @@
+:root{
+  --bg: #0a0f0d;
+  --panel: #101713;
+  --panel-edge: #1c2622;
+  --trace: #23342c;
+  --text: #e7f1ec;
+  --text-dim: #7f958a;
+  --accent: #3dff8a;
+  --danger: #ff5d5d;
+  --radius: 14px;
+}
+
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 20% 15%, #0d1512 0%, var(--bg) 45%),
+    var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  padding: 40px 24px;
+}
+
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(var(--trace) 1px, transparent 1px),
+    linear-gradient(90deg, var(--trace) 1px, transparent 1px);
+  background-size: 42px 42px;
+  opacity:0.12;
+  pointer-events:none;
+}
+
+.dashboard{
+  position:relative;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.dash-header{ margin-bottom: 24px; }
+
+.eyebrow{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom: 6px;
+}
+.eyebrow .dot{
+  width:6px; height:6px; border-radius:50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+h1{
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 18px;
+  letter-spacing: -0.01em;
+}
+h1 span{ color: var(--text-dim); font-weight: 500; }
+
+.connection-card, .calibration-card{
+  background: linear-gradient(180deg, var(--panel) 0%, #0c120f 100%);
+  border: 1px solid var(--panel-edge);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  max-width: 420px;
+}
+.calibration-card{ max-width: 100%; margin-top: 18px; }
+
+.connection-card summary, .calibration-card summary{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  cursor: pointer;
+  user-select:none;
+}
+.cal-text{
+  margin: 12px 0 0;
+  font-family:'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.cal-text code{
+  background: var(--trace);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.conn-row{
+  display:flex;
+  gap:8px;
+  margin-top: 12px;
+}
+input#espIp{
+  flex:1;
+  font-family:'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: #0d1411;
+  border: 1px solid var(--panel-edge);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+input#espIp:focus{ outline: 1px solid var(--accent); }
+button#saveIp{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: var(--trace);
+  color: var(--text);
+  border: 1px solid var(--panel-edge);
+  border-radius: 8px;
+  padding: 0 14px;
+  cursor: pointer;
+}
+button#saveIp:hover{ background:#2c3b33; }
+
+.conn-status{
+  margin-top: 10px;
+  font-family:'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.conn-status.ok b{ color: var(--accent); }
+.conn-status.err b{ color: var(--danger); }
+
+/* ---------- game shell ---------- */
+.game-shell{
+  position:relative;
+  background: linear-gradient(180deg, var(--panel) 0%, #0c120f 100%);
+  border: 1px solid var(--panel-edge);
+  border-radius: var(--radius);
+  padding: 18px 18px 22px;
+  box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.game-topbar{
+  display:flex;
+  justify-content:flex-end;
+  gap: 20px;
+  font-family:'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+.game-topbar .score span{ color: var(--accent); font-weight: 600; }
+.game-topbar .score.high span{ color: var(--text); }
+
+#gameCanvas{
+  display:block;
+  width: 100%;
+  height: auto;
+  background: #dfe4e0;
+  border-radius: 8px;
+  image-rendering: pixelated;
+}
+
+.game-overlay{
+  position:absolute;
+  left: 18px; right: 18px; top: 46px; bottom: 22px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap: 8px;
+  pointer-events:none;
+  border-radius: 8px;
+}
+.overlay-title{
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2c3833;
+}
+.overlay-sub{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #4a544e;
+}
+.game-overlay.hidden{ display:none; }
